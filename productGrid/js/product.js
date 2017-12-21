@@ -5,18 +5,14 @@ function Product(value){
   this.available = value.sold_out;
   this.url = value.url;
 }
-Product.showProducts = function(from, to, visibleProducts, productContentArea){
+
+Product.show = function(from, to, visibleProducts, productContentArea){
   productContentArea.empty();
   var _this = this;
   visibleProducts.forEach(function(element){
-      var productDiv = $("<div></div>");
-      productDiv.addClass("product-class");
-      var productImg = $("<img>");
-      productImg.attr({
-        "src": "images/"+ element.url
-      });
-      productImg.addClass("image-class");
-      productDiv.append(productImg);
-      productContentArea.append(productDiv);
+    var productDiv = $("<div></div>").addClass("product-class");
+    var productImg = $("<img>").attr("src", "images/" + element.url).addClass("image-class");
+    productDiv.append(productImg);
+    productContentArea.append(productDiv);
   });
 }
