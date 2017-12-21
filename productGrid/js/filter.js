@@ -4,8 +4,9 @@ function Filter(name, allProducts, domDetails){
   this.sideFilters = domDetails.sideFilters;
   this.productContentArea = domDetails.productContentArea;
   this.subFilters = [];
-  this.availableFilter = ['brand', 'color', 'available'];
 }
+
+Filter.prototype.AvailableFilter = ['brand', 'color', 'available'];
 
 Filter.prototype.init = function(){
   if(this.name != "available"){
@@ -68,27 +69,28 @@ Filter.prototype.createAvailableFilter = function(){
   availableList.append(availableLabel, availableCheckbox);
   this.sideFilters.append(availableList);
 }
+
 //on clicking
 Filter.prototype.checkboxClick = function(){
   var result = this.allProducts;
-  for(var i = 0; i < this.availableFilter.length; i++){
-    var selected = this.findSelectedCheckboxes(this.availableFilter[i]);
+  for(var i = 0; i < this.AvailableFilter.length; i++){
+    var selected = this.findSelectedCheckboxes(this.AvailableFilter[i]);
     if(selected.length > 0){
-      result = this.valuesForThisFilter(selected, result, this.availableFilter[i]);
+      result = this.productsInPresentFilter(selected, result, this.AvailableFilter[i]);
       if(!result.length){ break; }
     }
   }
-  Product.showProducts(0, this.allProducts.length-1, result, this.productContentArea);
+  Product.show(0, this.allProducts.length-1, result, this.productContentArea);
 }
 
 Filter.prototype.findSelectedCheckboxes = function(presentFilter){
   return $("input:checked")
-  .filter("[name=" + presentFilter + "]")
-  .map(function(){ return this.value; })
-  .get();
+    .filter("[name=" + presentFilter + "]")
+    .map(function(){ return this.value; })
+    .get();
 }
 
-Filter.prototype.valuesForThisFilter = function(selected, result, presentFilter){
+Filter.prototype.productsInPresentFilter = function(selected, result, presentFilter){
   var presentValues = [];
   for(var j = 0; j < result.length; j++){
     if(selected.includes(result[j][presentFilter])){
