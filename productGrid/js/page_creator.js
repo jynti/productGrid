@@ -22,7 +22,7 @@ ProductPageCreator.prototype.onJsonSuccess = function(data){
     _this.createProduct(value);
   });
   this.createSideFilter();
-  Product.showProducts(0, this.allProducts.length - 1, this.allProductsShowing, this.productContentArea);
+  Product.show(0, this.allProducts.length - 1, this.allProductsShowing, this.productContentArea);
 }
 
 ProductPageCreator.prototype.createProduct = function(value){
