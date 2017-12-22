@@ -6,7 +6,7 @@ function Product(value){
   this.url = value.url;
 }
 
-Product.show = function(from, to, visibleProducts, productContentArea){
+Product.show = function(visibleProducts, productContentArea){
   productContentArea.empty();
   var _this = this;
   visibleProducts.forEach(function(element){
